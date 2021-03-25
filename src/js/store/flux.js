@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			getPlanets: async () => {
-				await fetch("https://swapi.dev/api/planets", {
+				await fetch("https://swapi.dev/api/planets/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
