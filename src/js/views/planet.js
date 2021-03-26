@@ -54,7 +54,7 @@ export const Planet = props => {
 			</div>
 
 			<div className="container mt-3">
-				<Link to="/">
+				<Link to="/planets">
 					<span className="btn btn-primary btn-lg" href="#" role="button">
 						Back home
 					</span>

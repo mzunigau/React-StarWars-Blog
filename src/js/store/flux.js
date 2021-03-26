@@ -40,19 +40,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ planets: data.results });
 					});
 			},
-			changeColor: (index, color) => {
-				//get the store
+			addCharacterFavorite: index => {
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				let obj = store.favorites.find(obj => obj.name == store.peoples[index].name);
 
-				//reset the global store
-				setStore({ demo: demo });
+				if (obj == undefined) {
+					store.favorites.push(store.peoples[index]);
+					setStore(store);
+				}
+			},
+			addPlanetFavorite: id => {
+				const store = getStore();
+
+				let obj = store.favorites.find(favorite => favorite.name == store.planets[id].name);
+
+				if (obj == undefined) {
+					store.favorites.push(store.planets[id]);
+					setStore(store);
+				}
+			},
+			deleteFavorite: index => {
+				const store = getStore();
+				store.favorites.splice(index, 1);
+				setStore(store);
 			}
 		}
 	};

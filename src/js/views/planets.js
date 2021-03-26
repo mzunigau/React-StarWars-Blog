@@ -27,9 +27,22 @@ export const Planets = () => {
 									<span className="d-block">Terrains: {item.terrain}</span>
 								</p>
 
-								<Link to={"/planets/" + index}>
-									<button className="btn btn-primary">Learn more!</button>
-								</Link>
+								<div className="row">
+									<div className="col">
+										<Link to={`/planets/${index}`}>
+											<button className="btn btn-primary">Learn more!</button>
+										</Link>
+									</div>
+									<div className="col text-right">
+										<button
+											onClick={() => {
+												actions.addPlanetFavorite(index);
+											}}
+											className="btn btn-primary">
+											<i className="bi bi-heart" />
+										</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					);
