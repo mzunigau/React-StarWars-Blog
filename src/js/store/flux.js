@@ -6,9 +6,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			peoples: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			// Poblar el store desde el localstorage
+			setLocalStorage: (people, planet, favorites) => {
+				setStore(JSON.parse(people));
+				setStore(JSON.parse(planet));
+				setStore(JSON.parse(favorites));
 			},
 			getCharacters: async () => {
 				await fetch("https://swapi.dev/api/people/", {
@@ -23,6 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => {
 						setStore({ peoples: data.results });
+						localStorage.setItem("people", JSON.stringify({ peoples: data.results }));
 					});
 			},
 			getPlanets: async () => {
@@ -38,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => {
 						setStore({ planets: data.results });
+						localStorage.setItem("planet", JSON.stringify({ planets: data.results }));
 					});
 			},
 			addCharacterFavorite: index => {
@@ -48,6 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (obj == undefined) {
 					store.favorites.push(store.peoples[index]);
 					setStore(store);
+					localStorage.setItem("favorites", JSON.stringify({ favorites: store.favorites }));
 				}
 			},
 			addPlanetFavorite: id => {
@@ -58,12 +63,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (obj == undefined) {
 					store.favorites.push(store.planets[id]);
 					setStore(store);
+					localStorage.setItem("favorites", JSON.stringify({ favorites: store.favorites }));
 				}
 			},
 			deleteFavorite: index => {
 				const store = getStore();
 				store.favorites.splice(index, 1);
 				setStore(store);
+				localStorage.setItem("favorites", JSON.stringify({ favorites: store.favorites }));
 			}
 		}
 	};
