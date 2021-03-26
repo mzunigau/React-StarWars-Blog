@@ -3,42 +3,40 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-import "../../styles/home.scss";
+import "../../styles/planets.scss";
 
-export const Home = () => {
+export const Planets = () => {
 	const { store, actions } = useContext(Context);
 
-	//
 	return (
 		<div className="container">
-			<h1 className="mt-3">Characters</h1>
+			<h1 className="mt-3">Planets</h1>
 			<div className="card-columns m-5 animated fadeIn">
-				{store.peoples.map((item, id) => {
+				{store.planets.map((item, index) => {
 					return (
-						<div key={id} className="card puntero">
+						<div key={index} className="card puntero">
 							<img
 								className="card-img-top"
-								src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/star-wars-characters-ranked-1577122930.jpg?crop=1.00xw:1.00xh;0,0&resize=980:*"
+								src="https://res.cloudinary.com/jerrick/image/upload/fl_progressive,q_auto,w_1024/n2suqqwwzf1k5lsuzwly.jpg"
 								alt="Card image cap"
 							/>
 							<div className="card-body">
 								<h5 className="card-title">{item.name}</h5>
 								<p className="card-text">
-									<span className="d-block">Gender: {item.gender}</span>
-									<span className="d-block">Hair-Color: {item.hair_color}</span>
-									<span className="d-block">Eye-Color: {item.eye_color}</span>
+									<span className="d-block">Population: {item.population}</span>
+									<span className="d-block">Terrains: {item.terrain}</span>
 								</p>
 
 								<div className="row">
 									<div className="col">
-										<Link to={`/single/${id}`}>
+										<Link to={`/planets/${index}`}>
 											<button className="btn btn-primary">Learn more!</button>
 										</Link>
 									</div>
 									<div className="col text-right">
 										<button
 											onClick={() => {
-												actions.addCharacterFavorite(id);
+												actions.addPlanetFavorite(index);
 											}}
 											className="btn btn-primary">
 											<i className="bi bi-heart" />
